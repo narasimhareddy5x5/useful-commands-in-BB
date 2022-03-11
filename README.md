@@ -1,5 +1,3 @@
 # useful-commands-in-BB
 
-```
-hello
-```
+**hello**
