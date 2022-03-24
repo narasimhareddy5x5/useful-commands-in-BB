@@ -53,4 +53,9 @@ http://example.com/path1/path2/path3
 http://example.com/path1/path2
 http://example.com/path1/path2/path3/path4
 ```
-
+**Print lines**
+```
+head -10 lines.txt #It prints first 10 lines 
+tail -10 lines.txt #It prints last 10 lines
+sed -n -e '10,50p' lines.txt #It prints 10 to 50 lines
+```
