@@ -59,3 +59,37 @@ head -10 lines.txt #It prints first 10 lines
 tail -10 lines.txt #It prints last 10 lines
 sed -n -e '10,50p' lines.txt #It prints 10 to 50 lines
 ```
+**Convert Rows into columns words**
+```
+Cmd1 : fmt -1 old.txt >> new.txt
+Cmd2 : grep -oP '\S+' old.txt >> new.txt
+```
+```
+$ cat old.txt
+word.1 wors.2 word.3
+
+$ grep -oP '\S+' old.txt
+word.1
+word.2
+word.3
+```
+**Convert Columns into Rows words**
+```
+ awk 'BEGIN { ORS = " " } { print }'
+```
+```
+$ cat old.txt
+word.1
+word.2
+word.3
+
+$ awk 'BEGIN { ORS = " " } { print }' old.txt
+word.1 word.2 word.3
+```
+**Print multiple lines with "echo"**
+```
+echo -e "line1\nline2\nline3"
+line1
+line2
+line3
+```
