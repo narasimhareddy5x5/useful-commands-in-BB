@@ -53,6 +53,37 @@ http://example.com/path1/path2/path3
 http://example.com/path1/path2
 http://example.com/path1/path2/path3/path4
 ```
+with param values
+```
+for url in $(cut -d '?' -f 1 urls.txt | sort -u); do a=$(grep "$url" urls.txt | cut -d '?' -f 2 | sed 's/&/\n/g' | sort -u); qs="?"; for param in $(echo "$a" | cut -d "=" -f 1 | sort -u); do value=$(echo "$a" | grep "$param" | cut -d '=' -f 2 | head -n 1); qs="$qs$param=$value&"; done; echo "${url}${qs%&}"; done
+```
+
+```
+$ cat urls.txt
+https://test.com/path1/path2/path3?cat=hello
+https://test.com/path1/path2/path3?product=something
+https://test.com/path1/path2/path3?cat=testone
+https://test.com/path1/path2/path3?product=hello
+https://test.com/path1/diffpath?another_param=paramvalue
+https://test.com/diffpath/diffpath2?cat=123&prduct=pen
+https://test.test.com/path1/path2/path3?cat=news
+https://test.test.com/path1/path2/path3?product=game
+https://test.test.com/path1/path2/path3?cat=ball
+https://test.test.com/path1/path2/path3?product=bat
+https://test.test.com/path1/diffpath?another_param=paramvalue
+https://test.test.com/diffpath/diffpath2?cat=123&prduct=pen
+
+$ for url in $(cut -d '?' -f 1 urls.txt | sort -u); do a=$(grep "$url" urls.txt | cut -d '?' -f 2 | sed 's/&/\n/g' | sort -u); qs="?"; for param in $(echo "$a" | cut -d "=" -f 1 | sort -u); do value=$(echo "$a" | grep "$param" | cut -d '=' -f 2 | head -n 1); qs="$qs$param=$value&"; done; echo "${url}${qs%&}"; done
+
+https://test.com/diffpath/diffpath2?cat=123&prduct=pen
+https://test.com/path1/diffpath?another_param=paramvalue
+https://test.com/path1/path2/path3?cat=hello&product=hello
+https://test.test.com/diffpath/diffpath2?cat=123&prduct=pen
+https://test.test.com/path1/diffpath?another_param=paramvalue
+https://test.test.com/path1/path2/path3?cat=ball&product=bat
+```
+
+
 **Print lines**
 ```
 head -10 lines.txt #It prints first 10 lines 
