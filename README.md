@@ -4,6 +4,10 @@
 ```
 awk -F'?|=&|=' '{for(i=2;i<NF;i++) print $1 "?" $i "="}'
 ```
+OR
+```
+awk -F'\\?|=&|=' '{for(i=2; i<NF; i++) print $1 "?" $i "="}'
+```
 ```
 $ cat urls.txt
 http://example.com/test/test/test?apple=&bat=&cat=&dog=
